@@ -22,10 +22,12 @@ mp.add_hook("on_load", 50, function()
     -- Modify the URL
     local modified_url = modify_url(original_url)
     
-    -- Set the new URL for playback
-    mp.set_property("path", modified_url)
-    
-    -- Print the original and modified URLs for debugging
-    mp.msg.info("Original URL: " .. original_url)
-    mp.msg.info("Modified URL: " .. modified_url)
+    if modified_url ~= original_url then
+        -- Print the original and modified URLs for debugging
+        mp.msg.info("Original URL: " .. original_url)
+        mp.msg.info("Modified URL: " .. modified_url)
+        
+        -- Reload the file with the modified URL
+        mp.commandv("loadfile", modified_url, "replace")
+    end
 end)
