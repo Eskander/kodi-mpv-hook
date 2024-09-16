@@ -1,3 +1,7 @@
+-- kodi-stream.lua
+-- Parse Kodi streaming URLs with 'protocol options' when using MPV as an External Player.
+-- Source: https://github.com/Eskander/mpv-kodi-stream
+
 local mp = require 'mp'
 
 -- Modify the URL by removing everything after the '|' character
