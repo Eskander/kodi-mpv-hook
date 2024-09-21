@@ -3,13 +3,11 @@
 -- Source: https://github.com/Eskander/mpv-kodi-stream
 
 local mp = require 'mp'
-local http = require 'socket.http'
-local url = require 'socket.url'
 
 -- Decode URL-encoded strings
 function url_decode(str)
-    return str:gsub('%%(%x%x)', function(x)
-        return string.char(tonumber(x, 16))
+    return str:gsub("%%(%x%x)", function(hex)
+        return string.char(tonumber(hex, 16))
     end)
 end
 
