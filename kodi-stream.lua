@@ -6,6 +6,8 @@ local mp = require 'mp'
 
 -- Decode URL-encoded strings
 function url_decode(str)
+    -- Replace `+` with space, then decode %xx encoded characters
+    str = str:gsub("%+", " ")
     return str:gsub("%%(%x%x)", function(hex)
         return string.char(tonumber(hex, 16))
     end)
