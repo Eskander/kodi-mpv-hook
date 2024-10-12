@@ -42,19 +42,19 @@ function modify_url(url)
 
         -- Apply headers
         if params["User-Agent"] then
-            mp.set_property("options/user-agent", params["User-Agent"])
             mp.msg.info("Setting User-Agent: " .. params["User-Agent"])
+            mp.set_property("options/user-agent", params["User-Agent"])
         end
         
         if params["Referer"] then
-            mp.set_property("options/referer", params["Referer"])
             mp.msg.info("Setting Referer: " .. params["Referer"])
+            mp.set_property("options/referer", params["Referer"])
         end
         
         if params["Origin"] then
             local headers = string.format("Origin: %s", params["Origin"])
-            mp.set_property("options/http-header-fields", headers)
             mp.msg.info("Setting Origin: " .. params["Origin"])
+            mp.set_property("options/http-header-fields", headers)
         end
     end
 
@@ -71,8 +71,8 @@ mp.add_hook("on_load", 50, function()
     
     if modified_url ~= original_url then
         -- Print the original and modified URLs for debugging
-        mp.msg.info("Original URL: " .. original_url)
-        mp.msg.info("Modified URL: " .. modified_url)
+        mp.msg.info("Playing: " .. modified_url)
+        mp.msg.verbose("Original query: " .. original_url)
         
         -- Reload the file with the modified URL
         mp.commandv("loadfile", modified_url, "replace")
