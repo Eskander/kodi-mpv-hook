@@ -35,29 +35,33 @@ function modify_url(url)
         -- Get the part after the '|'
         extra_data = string.sub(url, pipe_position + 1)
     end
-
+    
     -- If there's extra data, parse it
     if extra_data then
         local params = parse_extra_data(extra_data)
-
+        
+        -- Print the original and modified URLs for debugging
+        mp.msg.verbose("Received query: " .. url)
+        mp.msg.info("Playing: " .. modified_url)
+        
         -- Apply headers
         if params["User-Agent"] then
-            mp.msg.info("Setting User-Agent: " .. params["User-Agent"])
+            mp.msg.info("User-Agent: " .. params["User-Agent"])
             mp.set_property("options/user-agent", params["User-Agent"])
         end
         
         if params["Referer"] then
-            mp.msg.info("Setting Referer: " .. params["Referer"])
+            mp.msg.info("Referer: " .. params["Referer"])
             mp.set_property("options/referer", params["Referer"])
         end
         
         if params["Origin"] then
             local headers = string.format("Origin: %s", params["Origin"])
-            mp.msg.info("Setting Origin: " .. params["Origin"])
+            mp.msg.info("Origin: " .. params["Origin"])
             mp.set_property("options/http-header-fields", headers)
         end
     end
-
+    
     return modified_url
 end
 
@@ -69,12 +73,8 @@ mp.add_hook("on_load", 50, function()
     -- Modify the URL and apply headers
     local modified_url = modify_url(original_url)
     
+    -- Reload the file with the modified URL
     if modified_url ~= original_url then
-        -- Print the original and modified URLs for debugging
-        mp.msg.info("Playing: " .. modified_url)
-        mp.msg.verbose("Original query: " .. original_url)
-        
-        -- Reload the file with the modified URL
         mp.commandv("loadfile", modified_url, "replace")
     end
 end)
