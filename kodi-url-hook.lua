@@ -1,6 +1,6 @@
 -- kodi-url-hook.lua
 -- Parse Kodi streaming URLs with 'protocol options' when using MPV as an External Player.
--- Source: https://github.com/Eskander/mpv-kodi-hook
+-- Source: https://github.com/Eskander/kodi-url-hook
 
 local mp = require 'mp'
 
