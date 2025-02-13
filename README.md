@@ -1,4 +1,4 @@
-# **kodi-url-hook for mpv**  
+# **kodi-mpv-hook**  
 
 [mpv](https://mpv.io/) is an excellent choice as an [External Player](https://kodi.wiki/view/External_players) for [Kodi](https://kodi.tv/), combining Kodi’s content management with mpv’s advanced playback features. However, when using streaming add-ons, this setup can break because Kodi embeds **protocol options** into its URLs using a [custom format](https://kodi.wiki/view/HTTP).  
 
